@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>COURSE</th>
+            <th>CREATEDAT</th>
+            </tr>
+           
+        </thead>
+        <tbody>
+           <% if (users.length === 0 ) { %>
+            <tr>
+                <td>No User found</td>
+            </tr>
+         <% } else { %>
+            <% users.forEach(user=> { %>
+                <tr>
+                    <td><%= user._id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.age %></td>
+                     <td><%= user.course %></td>
+                     <td><%= new Date(user.createdAt).toLocaleDateString() %></td>
+                     <td>
+                        <form action="/users/delete/<%= user._id %>" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                     </td>
+                </tr>
+          <%  });  %>
+      <%   }  %>
+        </tbody>
+    </table>
+
+    <a href="/users/logout">Logout</a>
+
+</body>
+</html>
